@@ -75,6 +75,23 @@ I = 25*exp(1j*pi/2);
 polarplot([0 angle(I)], [0 abs(I)]); % linje fra 0∠0 til abs(I)∠angle(I)
 
 
+% ========== Kompleks/imaginær plot ==========
+plot(real(s), imag(s));
+
+% Eks:
+R = linspace(0, 400, 100);
+
+w0 = 1/sqrt(L*C);
+alpha = R/(2*L);
+
+s1 = -alpha + sqrt(alpha.^2 - w0.^2);
+s2 = -alpha - sqrt(alpha.^2 - w0.^2);
+
+plot(real(s1), imag(s1)); hold on
+plot(real(s2), imag(s2))
+axis equal
+
+
 % ========== Differensialligninger ==========
 solution = dsolve(ode, cond); % ode: differensialligning, cond: initialbetingelse
 
@@ -88,6 +105,7 @@ cond = i(0) == 0.5; % Initialbetingelse definert ved ==
 sol = dsolve(ode, cond); % Løsning ved dsolve()
 
 fplot(sol, [0, 5*tau]);
+
 
 
 
