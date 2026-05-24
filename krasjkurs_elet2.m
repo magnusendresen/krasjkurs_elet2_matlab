@@ -119,10 +119,10 @@ Vc0 = 15; % startspenning
 Vcf = 0; % forced respons
 
 ode = diff(vcn, t, 2) + R/L * diff(vcn, t) + 1/(L*C) * vcn == 0; % naturlig respons
-dvcndt = diff(vcn, t);
+d_vcn_dt = diff(vcn, t);
 
 cond1 = vcn(0) == Vc0 - Vcf; % startverdi for naturlig respons
-cond2 = C*dvcndt(0) == 0; % startstrøm i kondensator
+cond2 = C*d_vcn_dt(0) == 0; % startstrøm i kondensator
 
 vcn(t) = dsolve(ode, [cond1 cond2]);
 vc(t) = vcn + Vcf;
