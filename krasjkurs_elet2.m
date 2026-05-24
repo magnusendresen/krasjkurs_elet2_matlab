@@ -76,7 +76,7 @@ polarplot([0 angle(I)], [0 abs(I)]); % linje fra 0∠0 til abs(I)∠angle(I)
 
 
 % ========== Kompleks/imaginær plot ==========
-plot(real(s), imag(s));
+plot(real(s), imag(s)); % s: komplekst tall
 
 % Eks:
 R = linspace(0, 400, 100);
@@ -125,8 +125,7 @@ cond1 = vcn(0) == Vc0 - Vcf; % startverdi for naturlig respons
 cond2 = C*dvcndt(0) == 0; % startstrøm i kondensator
 
 vcn(t) = dsolve(ode, [cond1 cond2]);
-vcf = Vcf;
-vc(t) = vcn + vcf;
+vc(t) = vcn + Vcf;
 
 fplot(vc, [0, 5]); grid on;
 grid on
