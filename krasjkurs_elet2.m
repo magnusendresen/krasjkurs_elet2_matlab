@@ -92,7 +92,7 @@ plot(real(s2), imag(s2))
 axis equal
 
 
-% ========== Differensialligninger ==========
+% ========== Førsteordens differensialligninger ==========
 solution = dsolve(ode, cond); % ode: differensialligning, cond: initialbetingelse
 
 % Eks:
@@ -100,12 +100,31 @@ syms i(t) % i som funksjon av t symbolsk
 
 V = 45; R = 30; L = 90e-3;
 
-ode = diff(i, t) + R/L * i == V/L; % Differensialligning med diff() for deriverte og == for likhetsskille
+ode = diff(i, t) + R/L * i == V/L; % Førsteordens ODE med diff() for deriverte og == for likhetsskille
 cond = i(0) == 0.5; % Initialbetingelse definert ved ==
 sol = dsolve(ode, cond); % Løsning ved dsolve()
 
 fplot(sol, [0, 5*tau]);
 
 
+% ========== Andreordens differensialligning ==========
+solution = dsolve(ode, [cond1 cond2]); % ode: differensialligning, cond1/cond2: initialbetingelser
+
+% Eks:
+syms vc(t) % spenning som funksjon av t
+
+Vs = 15;
+R = 10; L = 2.5; C = 25e-3;
+
+ode = diff(vc, t, 2) + R/L * diff(vc, t) + 1/(L*C) * vc == Vs/(L*C); % andreordens ODE med diff() for deriverte og == for likhetsskille
+dvc_dt = diff(vc, t);
+
+cond1 = vc(0) == 0;        % startspenning på kondensator
+cond2 = C*dvc_dt(0) == 0;  % startstrøm i kondensator
+
+vc(t) = dsolve(ode, [cond1 cond2]);
+
+fplot(vc, [0, 5])
+grid on
 
 
