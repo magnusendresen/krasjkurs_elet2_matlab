@@ -111,20 +111,22 @@ fplot(sol, [0, 5*tau]);
 solution = dsolve(ode, [cond1 cond2]); % ode: differensialligning, cond1/cond2: initialbetingelser
 
 % Eks:
-syms vc(t) % spenning som funksjon av t
+syms vcn(t) % naturlig respons som funksjon av t
 
-Vs = 15;
 R = 10; L = 2.5; C = 25e-3;
 
-ode = diff(vc, t, 2) + R/L * diff(vc, t) + 1/(L*C) * vc == Vs/(L*C); % andreordens ODE med diff() for deriverte og == for likhetsskille
-dvc_dt = diff(vc, t);
+Vc0 = 15; % startspenning
+Vcf = 0; % forced respons
 
-cond1 = vc(0) == 0;        % startspenning på kondensator
-cond2 = C*dvc_dt(0) == 0;  % startstrøm i kondensator
+ode = diff(vcn, t, 2) + R/L * diff(vcn, t) + 1/(L*C) * vcn == 0; % naturlig respons
+dvcndt = diff(vcn, t);
 
-vc(t) = dsolve(ode, [cond1 cond2]);
+cond1 = vcn(0) == Vc0 - Vcf; % startverdi for naturlig respons
+cond2 = C*dvcndt(0) == 0; % startstrøm i kondensator
 
-fplot(vc, [0, 5])
+vcn(t) = dsolve(ode, [cond1 cond2]);
+vcf = Vcf;
+vc(t) = vcn + vcf;
+
+fplot(vc, [0, 5]); grid on;
 grid on
-
-
