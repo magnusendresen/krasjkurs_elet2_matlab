@@ -85,6 +85,9 @@ s = tf('s'); % s definert ved tf()
 H = 1/(1+s*R1*C)^2; % overføringsfunksjon som funksjon av s
 bode(H);
 
+% Evt. ved egendefinert range
+w = logspace(a, b, n); % range fra 10^a til 10^b med n steg
+bode(H, w);
 
 % ========== Kompleks/imaginær plot ==========
 plot(real(s), imag(s)); % s: komplekst tall
