@@ -19,7 +19,7 @@ Hs = collect(simplifyFraction(Hs), s);                                      % Pe
 
 
 % ========== Symbolsk funksjon ==========
-f(x) = a*x + b; % x: variabel, a/b: konstanter
+f(x) = a*x + b;  % x: variabel, a/b: konstanter
 
 % Eks:
 syms t
@@ -171,3 +171,37 @@ vc(t) = vcn + Vcf;
 
 fplot(vc, [0, 5]); grid on;
 grid on
+
+
+% ========== Laplace ==========
+F = laplace(f, t, s);    % f: tidsfunksjon, t: tidsvariabel, s: Laplace-variabel
+f = ilaplace(F, s, t);   % F: s-domeneuttrykk, s: Laplace-variabel, t: tidsvariabel
+
+% Eks:
+syms t s R C positive
+
+f = exp(-t/(R*C));       % Tidsfunksjon
+F = laplace(f, t, s);    % Går fra tidsdomene til s-domene
+
+f = ilaplace(F, s, t);   % Går fra s-domene tilbake til tidsdomene
+
+
+% ========== Bonus: H(s) på standardform ==========
+% H(s) = A*s/(a*s^2 + b*s + c)
+
+syms R1 C1 R2 C2 Rf Ri s real positive
+
+H1s = s / (s + 1/(R1*C1));
+H2s = (1/(R2*C2)) / (s + 1/(R2*C2));
+H3s = (Rf + Ri) / Ri;
+
+Hs = collect(simplifyFraction(H1s*H2s*H3s), s);
+
+A = C1*R1*(Rf + Ri);
+a = C1*C2*R1*R2*Ri;
+b = Ri*(C1*R1 + C2*R2);
+c = Ri;
+
+beta = b/a;
+w0 = sqrt(c/a);
+K = A/b;
