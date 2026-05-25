@@ -61,17 +61,20 @@ I1 = sol.I1;                        % Svar uthentes fra solution
 I2 = sol.I2;                        % Svar uthentes fra solution
 
 
-% ========== Enkel plot ==========
-plot(t, f(t));  % t: variabel, f: funksjon av t
+% ========== Funksjonsplot- to varianter ==========
+plot(x, y);         % x: x-verdier, y: y-verdier
+fplot(f, [a, b]);   % f: funksjon, a: start, b: slutt
 
 % Eks:
-w = 2*pi * linspace(10, 120, 100);
-R = 10; L = 10e-3; C = 10e-9;
+x = linspace(0, 10, 100);
+y = x.^2;
+plot(x, y);         % Plotter y mot x
+hold on;            % Kommende funksjoner plottes i samme graf
 
-Z = R + 1j*w*L + 1./(1j*w*C);
-plot(w, imag(Z)); 
-hold on;  % Kommende funksjoner plottes i samme graf
-grid on;  % Rutenett til grafen
+syms t
+f(t) = 2*t + 3;     % Symbolsk funksjon av t
+fplot(f, [0, 10]);  % Plotter f fra t = 0 til t = 10
+grid on;            % Rutenett til grafen
 
 
 % ========== Subplots ==========
