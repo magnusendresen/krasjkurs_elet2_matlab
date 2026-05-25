@@ -75,6 +75,17 @@ I = 25*exp(1j*pi/2);
 polarplot([0 angle(I)], [0 abs(I)]); % linje fra 0∠0 til abs(I)∠angle(I)
 
 
+% ========== Bodeplot ==========
+bode(H); % H: overføringsfunksjon
+
+% Eks:
+R = 10e3; C = 15.9e-9;
+s = tf('s'); % s definert ved tf()
+
+H = 1/(1+s*R1*C)^2; % overføringsfunksjon som funksjon av s
+bode(H);
+
+
 % ========== Kompleks/imaginær plot ==========
 plot(real(s), imag(s)); % s: komplekst tall
 
