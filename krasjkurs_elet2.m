@@ -208,3 +208,21 @@ c = Ri;
 beta = b/a;
 w0 = sqrt(c/a);
 K = A/b;
+
+
+% ========== Bonus: Teststrøm for Zth ==========
+% Zth = Vab/i2 når uavhengige kilder er satt til null
+R1 = 8; L1 = 62.5; L2 = 12.5; M = 10; w = 4000;
+syms i1 i2
+
+IL1(i1, i2) = -i1;      % Strøm i spole 1
+IL2(i1, i2) = i2 - i1;  % Strøm i spole 2
+
+VL1(i1, i2) = 1j*w*L1*IL1(i1, i2) + 1j*w*M*IL2(i1, i2);  % Spenning over L1
+VL2(i1, i2) = 1j*w*L2*IL2(i1, i2) + 1j*w*M*IL1(i1, i2);  % Spenning over L2
+
+eq = R1*i1 - VL1(i1, i2) - VL2(i1, i2) == 0;  % KVL med teststrøm
+i1 = solve(eq, i1);                            % Løser intern strøm
+
+Vab = -VL2(i1, i2);              % Portspenning fra teststrøm
+Zth = simplifyFraction(Vab/i2)   % Thevenin-impedans
