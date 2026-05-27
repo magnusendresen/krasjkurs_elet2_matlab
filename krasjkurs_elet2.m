@@ -10,6 +10,7 @@ simplify(expr);          % Rydder uttrykk
 simplifyFraction(expr);  % Samler brøk penere
 collect(expr, s);        % Samler etter s
 factor(expr);            % Faktoriserer uttrykk
+numden(expr);            % Deler opp uttrykket i teller (numerator) og nevner (denomenator)
 
 % Eks; nyttig for overføringsfunksjoner:
 syms s R1 C RL real positive
@@ -228,7 +229,7 @@ Vab = -VL2(i1, i2);              % Portspenning fra teststrøm
 Zth = simplifyFraction(Vab/i2)   % Thevenin-impedans
 
 
-% ========== Røtter / stabilitet ==========
+% ========== Bonus: Røtter / stabilitet ==========
 roots(x);  % x: koeffisienter fra høyeste til laveste s-potens
 
 % Eks:
