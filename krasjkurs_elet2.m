@@ -226,3 +226,22 @@ i1 = solve(eq, i1);                            % Løser intern strøm
 
 Vab = -VL2(i1, i2);              % Portspenning fra teststrøm
 Zth = simplifyFraction(Vab/i2)   % Thevenin-impedans
+
+
+% ========== Røtter / stabilitet ==========
+roots(x);  % x: koeffisienter fra høyeste til laveste s-potens
+
+% Eks:
+syms s  % Fri variabel s
+
+m = 2;  % Felles faktor
+a = 1; b = 3; c = 7; d = 5; e = 0;  % Koeffisienter
+
+p = m*(a*s^4 + b*s^3 + c*s^2 + d*s + e);  % Karakteristisk polynom / nevner
+p = collect(simplify(p), s);              % Forenkling til polynomform i s
+
+x = [a*m b*m c*m d*m e*m];  % Koeffisienter fra s^4 til s^0
+r = roots(x)
+
+% Stabilitet sjekkes manuelt fra r:
+% Godkjent hvis alle realdeler er negative, bortsett fra maks én rot i s = 0 + j0.
