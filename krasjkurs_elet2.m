@@ -172,7 +172,7 @@ syms vcn(t)  % Naturlig respons som funksjon av t
 R = 10; L = 2.5; C = 25e-3;
 Vc0 = 15;  % Startspenning
 
-ode = diff(vcn, t, 2) + R/L * diff(vcn, t) + 1/(L*C) * vcn == 0;
+ode = diff(vcn, t, 2) + R/L * diff(vcn, t) + 1/(L*C) * vcn == 0; % satt lik null for naturlig respons, kan brukes med tvungen respons om ønsket
 d_vcn_dt = diff(vcn, t);
 
 cond1 = vcn(0) == Vc0;       % Startspenning
