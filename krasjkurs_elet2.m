@@ -1,5 +1,5 @@
 % ========== Matlab cheatsheet ELET1002 ==========
-% Om du finner feil, gjerne gi beskjed til
+% Om du finner feil, eller har forslag til noe som bør legges til, gjerne gi beskjed til
 % magnus.stensby.endresen@gmail.com
 % eller
 % magnsen@stud.ntnu.no
