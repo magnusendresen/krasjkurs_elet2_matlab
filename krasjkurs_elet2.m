@@ -9,8 +9,10 @@
 % ========== Oppstart av nytt prosjekt ==========
 clc        % Tømmer terminalen/kommandovinduet
 clf        % Tømmer gjeldene figurvindu
-clear all  % Tømmer alle variabler, funksjoner og all cache; treg, anbefales sjelden
-clearvars  % Tømmer kun alle variabler; rask, anbefalses
+clearvars  % Tømmer kun alle variabler; rask, anbefalses, evt clear all for å tømme all cache
+
+sympref('FloatingPointOutput',true) % Setter alle kommende utskrifter til desimaltall
+format short % long: ca. 15 desimaler, short: ca. 4 desimaler, bank: ca. 2 desimaler
 
 
 % ========== Symbolsk forenkling ==========
