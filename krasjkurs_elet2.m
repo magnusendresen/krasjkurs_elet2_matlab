@@ -163,28 +163,43 @@ sol = dsolve(ode, cond);            % Løsning ved dsolve()
 fplot(sol, [0, 5*tau]);
 
 
-% ========== Andreordens differensialligning ==========
+% ========== Andreordens naturlig respons ==========
 solution = dsolve(ode, [cond1 cond2]);  % ode: differensialligning, cond1/cond2: initialbetingelser
 
 % Eks:
 syms vcn(t)  % Naturlig respons som funksjon av t
 
 R = 10; L = 2.5; C = 25e-3;
-
 Vc0 = 15;  % Startspenning
-Vcf = 0;   % Forced respons
 
-ode = diff(vcn, t, 2) + R/L * diff(vcn, t) + 1/(L*C) * vcn == 0;  % Naturlig respons
+ode = diff(vcn, t, 2) + R/L * diff(vcn, t) + 1/(L*C) * vcn == 0;
 d_vcn_dt = diff(vcn, t);
 
-cond1 = vcn(0) == Vc0 - Vcf;  % Startverdi for naturlig respons
-cond2 = C*d_vcn_dt(0) == 0;   % Startstrøm i kondensator
+cond1 = vcn(0) == Vc0;       % Startspenning
+cond2 = C*d_vcn_dt(0) == 0;  % Startstrøm i kondensator
 
 vcn(t) = dsolve(ode, [cond1 cond2]);
-vc(t) = vcn + Vcf;
 
-fplot(vc, [0, 5]); grid on;
-grid on
+fplot(vcn, [0, 5]); grid on;
+
+
+% ========== Forced respons med fasor ==========
+xf(t) = abs(X)*cos(w*t + angle(X));  % X: fasor, w: vinkelfrekvens
+
+% Eks:
+syms t
+
+R = 10; L = 2.5; C = 25e-3;
+w = 10;
+
+Vs = 20*exp(1j*deg2rad(30));  % Fasor: 20∠30° V
+
+Z = R + 1j*w*L + 1/(1j*w*C);  % Serie RLC-impedans
+I = Vs/Z;                     % Fasorstrøm
+
+X = I * 1/(1j*w*C);           % Respons som fasor
+
+xf(t) = abs(X)*cos(w*t + angle(X));  % Forced respons i tidsplanet
 
 
 % ========== Laplace ==========
