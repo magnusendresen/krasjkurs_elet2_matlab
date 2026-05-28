@@ -1,3 +1,11 @@
+% ========== Matlab cheatsheet ELET1002 ==========
+% Om du finner feil, gjerne gi beskjed til
+% magnus.stensby.endresen@gmail.com
+% eller
+% magnsen@stud.ntnu.no
+
+
+
 % ========== Oppstart av nytt prosjekt ==========
 clc        % Tømmer terminalen/kommandovinduet
 clf        % Tømmer gjeldene figurvindu
