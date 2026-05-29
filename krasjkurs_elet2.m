@@ -43,7 +43,7 @@ f2 = f(2);       % Verdi ved t = 2
 fplot(f, [0, 10]);  % Kan også plottes ved fplot()
 
 
-% ========== Numerisk løsning av ligninger ==========
+% ========== Numerisk løsning av ligninger: for innvikla uttrykk ==========
 vpasolve([eq1, eq2], [var1, var2]);  % eq: equation, var: variabel
 
 % Eks:
@@ -55,7 +55,7 @@ eq = cos(abs(angle(VL) - angle(IL))) == 0.95;  % Ligning defineres med == som li
 IL = vpasolve(eq, IL);  % Løsning numerisk med vpasolve()
 
 
-% ========== Smbolsk løsning av ligninger ==========
+% ========== Smbolsk løsning av ligninger: for enklere symbolske uttrykk ==========
 % IKKE solve5!! skrivefeil
 solve([eq1 eq2], [var1 var2]);  % eq: equation, var: variabel
 
