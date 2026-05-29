@@ -298,10 +298,10 @@ H = simplifyFraction(sol.Vut/Vin);  % Symbolsk transferfunksjon
 
 [num, den] = numden(H);             % Teller og nevner hver for seg
 
-num = sym2poly(num);                % Symbolsk polynom til koeffisienter
-den = sym2poly(den);                % Må til for å bruke tf()
+num = sym2poly(num);                % Symbolsk polynom til koeffisienter, trengs for tf()
+den = sym2poly(den);
 
-H = tf(num, den);                   % Numerisk transferfunksjon
+H = tf(num, den);                   % Transferfunksjon
 
 bode(H)
 grid on
