@@ -56,6 +56,7 @@ IL = vpasolve(eq, IL);  % Løsning numerisk med vpasolve()
 
 
 % ========== Smbolsk løsning av ligninger ==========
+% IKKE solve5!! skrivefeil
 solve([eq1 eq2], [var1 var2]);  % eq: equation, var: variabel
 
 % Eks:H
