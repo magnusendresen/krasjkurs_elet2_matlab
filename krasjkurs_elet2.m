@@ -271,3 +271,37 @@ r = roots(x)
 
 % Stabilitet sjekkes manuelt fra r:
 % Godkjent hvis alle realdeler er negative, bortsett fra maks én rot i s = 0 + j0.
+
+
+% ========== Bonus: Fra symbolsk H(s) til bode ==========
+% solve() gir symbolsk uttrykk, bode() krever transferfunksjon fra tf()
+
+clc
+clearvars
+
+R1 = 20e3; R2 = 1e3;
+C1 = 0.5e-6; C2 = C1;
+Ri = 10e3; Rf = 30e3;
+
+syms s
+ZC = 1/(s*C1);
+
+syms Vut_LPF Vut_HPF Vin Vut
+
+eq1 = Vin/R1 == -Vut_LPF/(1/R1 + 1/ZC)^-1;
+eq2 = Vin/(R2 + ZC) == -Vut_HPF/R2;
+eq3 = Vut_LPF/Ri + Vut_HPF/Ri == -Vut/Rf;
+
+sol = solve([eq1 eq2 eq3], [Vut_HPF Vut_LPF Vut]);
+
+H = simplifyFraction(sol.Vut/Vin);  % Symbolsk transferfunksjon
+
+[num, den] = numden(H);             % Teller og nevner hver for seg
+
+num = sym2poly(num);                % Symbolsk polynom til koeffisienter
+den = sym2poly(den);                % Må til for å bruke tf()
+
+H = tf(num, den);                   % Numerisk transferfunksjon
+
+bode(H)
+grid on
