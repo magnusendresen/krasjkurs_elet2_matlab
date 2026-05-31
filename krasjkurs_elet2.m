@@ -131,6 +131,14 @@ bode(H);
 w = logspace(a, b, n);  % Range fra 10^a til 10^b med n steg
 bode(H, w);
 
+% Eksempel med fornuftig range:
+w0 = sqrt(1/(L*C));
+a = log10(w0/10);
+b = log10(w0*10);
+w = logspace(a, b, 100);
+
+bode(H, w)
+
 
 % ========== Kompleks/imaginær plot ==========
 plot(real(s), imag(s));  % s: komplekst tall
@@ -306,3 +314,4 @@ H = tf(num, den);                   % Transferfunksjon
 
 bode(H)
 grid on
+
